@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Designação de Fiscal de Contrato - Formulário</title>
+    <style>
+        /* Estilos básicos para o formulário */
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h2, h3 { color: #333; border-bottom: 2px solid #ddd; padding-bottom: 5px; margin-top: 20px; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input[type="text"], input[type="number"], input[type="date"], textarea {
+            width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
+        }
+        textarea { resize: vertical; height: 100px; }
+        button { background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; margin-top: 20px; font-size: 16px; margin-right: 10px;}
+        button:hover { background-color: #0056b3; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+        .full-width { grid-column: 1 / -1; }
+
+        /* Estilos do Memorando de Saída */
+        #memorando-output {
+            display: none; /* Esconde o memorando inicialmente */
+            padding: 30px; margin-top: 10px; line-height: 1.5;
+        }
+                /* Adicionalmente, garante que os parágrafos estejam justificados */
+        #memorando-output p {
+            font-size: 10pt; /* <--- AQUI VOCÊ DEFINE O TAMANHO DA FONTE! */
+            text-align: justify;
+            margin-bottom: 1em; /* Espaçamento entre parágrafos, se desejar */
+        }
+        
+        /* NOVO ESTILO DO CABEÇALHO (Baseado no PGM) */
+        .memorando-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #ccc; /* Linha de separação, se necessário */
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .header-unidade {
+            font-size: 20px;
+            font-weight: bold;
+            color: #000; /* Cor do texto da unidade */
+            line-height: 1.2;
+            padding-right: 20px;
+            border-right: 1px solid #333; /* Separador vertical */
+            flex-grow: 1; /* Ocupa espaço flexível */
+        }
+        .header-unidade span { display: block; font-weight: normal; font-size: 24px; } /* a fonte de saída está em 28*/
+        .header-logo {
+            padding-left: 16px;
+            text-align: right;
+
+        }      
+        /* NOVO ESTILO: Para a linha fixa da Prefeitura */
+        #out-prefeitura-fixa {
+            display: block; /* Garante que fique em uma nova linha */
+            font-size: 12px; /* Tamanho da fonte menor que a unidade */
+            font-weight: normal; 
+            color: #555; /* Cor um pouco mais clara, se desejar */
+            margin-top: 5px;
+        }    
+        
+        .header-logo img {
+            max-height: 100px; /* Ajuste o tamanho do logo */
+            width: auto;
+            display: block;
+        }
+
+       
+/* AJUSTES DE TAMANHO DE FONTE */
+
+/* 1. Título (H1) */
+#memorando-output h1 { 
+    font-size: 12pt; /* ALTERADO: Título para 14pt (equivalente a 14) */
+    text-align: center; 
+    margin-bottom: 30px; 
+}
+
+/* 2. Assinatura */
+#memorando-output .assinatura { 
+    margin-top: 80px; 
+    text-align: center; 
+    font-size: 10pt; /* NOVO: Aplicando 10pt ao bloco de assinatura */
+}
+
+/* 3. Data/Local */
+#memorando-output .data-local { 
+    text-align: right; 
+    margin-top: 40px; 
+    font-size: 10pt; /* NOVO: Aplicando 10pt para manter a consistência com a assinatura */
+}
+
+/* 4. Linha Divisória (Inalterada) */
+#memorando-output .linha-assinatura { 
+    border-top: 1px solid #000; 
+    width: 60%; 
+    margin: 5px auto 0; 
+}
+
+/* OUTROS AJUSTES (para o texto que estava com 12pt) */
+#memorando-output p {
+    font-size: 10pt; /* Sugestão: Alterei o corpo do texto de 12pt para 11pt para que o título 14pt se destaque mais */
+    text-align: justify;
+    margin-bottom: 1em; 
+}
+
+
+        
+        /* Ocultar formulário na impressão e exibir memorando */
+        @media print {
+            #formulario, #botoes-acao, #btn-editar, #btn-imprimir { display: none; }
+            #memorando-output { display: block !important; border: none; padding: 0; }
+            body { margin: 0; padding: 0; background: white; }
+            .container { box-shadow: none; padding: 0; }
+            /* Garantir que o cabeçalho imprima corretamente */
+            .memorando-header {
+                -webkit-print-color-adjust: exact; /* Para Chrome/Safari */
+                print-color-adjust: exact; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div id="formulario">
+        <h2>Formulário de Designação de Fiscal de Contratatação</h2>
+        
+        <h3>0. Identificação da Unidade Emissora</h3>
+        <div class="full-width">
+            <label for="unidadeEmissora">Unidade Emissora do Documento (Cabeçalho):</label>
+            <input type="text" id="unidadeEmissora" value="" required>
+            <p style="font-size: 10px; color: #555;">Ex: Procuradoria Geral do Município, Secretaria de Educação, etc.</p>
+        </div>
+
+        <h3>1. Dados do Contrato e Data</h3>
+        <div class="grid">
+            <div>
+                <label for="exercicio">Exercício:</label>
+                <input type="number" id="exercicio" value="2025" required>
+            </div>
+            <div>
+                <label for="dataMemorando">Data do Memorando:</label>
+                <input type="date" id="dataMemorando" value="2025-01-24" required>
+            </div>
+            <div class="full-width">
+                <label for="setorAtendido">Setor a ser Atendido/Destino (Corpo do Memorando):</label>
+                <input type="text" id="setorAtendido" value="" required>
+            </div>
+           <div class="full-width">
+    <label for="objetoSelect">Selecionar Objeto Predefinido:</label>
+    <select id="objetoSelect" onchange="selecionarObjeto()">
+        <option value="" selected>--- Selecione ou Escreva Abaixo ---</option>
+        <option value="Serviço de Limpeza Urbana e Coleta de Resíduos">Serviço de Limpeza Urbana e Coleta de Resíduos</option>
+        <option value="Aquisição de Material de Consumo para Escritório">Aquisição de Material de Consumo para Escritório</option>
+        <option value="CONTRATAÇÃO DE EMPRESA PARA O FORNECIMENTO DE ÁGUA MINERAL NATURAL OU ADICIONADA DE SAIS, SEM GÁS, ENVASADAS EM BOTIJÕES DE 20 LITROS, COPOS DE 200 ML, GARRAFAS DE 500 ML E TAXA DE REPOSIÇÃO PARA SUBSTITUIÇÃO DE GARRAFÃO AVARIADO PELA CONTRATANTE">Contratação de Água Mineral (Completo)</option>
+        </select>
+</div>
+
+<div class="full-width" style="margin-top: 15px;">
+    <label for="objetoContrato">Detalhes / Edição do Objeto:</label>
+    <textarea id="objetoContrato" required></textarea>
+</div>
+        </div>
+
+        <h3>2. Fiscal de Contrato (Titular)</h3>
+        <div class="grid">
+            <div class="full-width">
+                <label for="nomeFiscal">Nome Completo:</label>
+                <input type="text" id="nomeFiscal" value="" required>
+            </div>
+            <div><label for="rgFiscal">RG:</label><input type="text" id="rgFiscal" value="" required></div>
+            <div><label for="cpfFiscal">CPF:</label><input type="text" id="cpfFiscal" value="" required></div>
+            <div><label for="matriculaFiscal">Matrícula:</label><input type="number" id="matriculaFiscal" value="" required></div>
+            <div class="full-width">
+                <label for="lotacaoFiscal">Lotação (Setor atual):</label>
+                <input type="text" id="lotacaoFiscal" value="" required>
+            </div>
+        </div>
+        
+        <h3>3. Fiscal de Contrato (Suplente)</h3>
+        <div class="grid">
+            <div class="full-width">
+                <label for="nomeSuplente">Nome Completo:</label>
+                <input type="text" id="nomeSuplente" value="" required>
+            </div>
+            <div><label for="rgSuplente">RG:</label><input type="text" id="rgSuplente" value="" required></div>
+            <div><label for="cpfSuplente">CPF:</label><input type="text" id="cpfSuplente" value="" required></div>
+            <div><label for="matriculaSuplente">Matrícula:</label><input type="number" id="matriculaSuplente" value="" required></div>
+        </div>
+
+        <h3>4. Autoridade Designante</h3>
+        <div class="grid">
+            <div>
+                <label for="nomeDesignante">Nome Completo:</label>
+                <input type="text" id="nomeDesignante" value="" required>
+            </div>
+            <div>
+                <label for="cargoDesignante">Cargo/Função:</label>
+                <input type="text" id="cargoDesignante" value="" required>
+            </div>
+        </div>
+        
+        <div id="botoes-acao">
+            <button type="button" onclick="gerarMemorando()">Gerar Memorando / Visualizar</button>
+        </div>
+    </div> <div id="memorando-output">
+        <div class="memorando-header">
+            <div class="header-unidade">
+                <span id="out-unidadeEmissora1"></span>
+                <span id="out-unidadeEmissora2"></span>
+                <span id="out-prefeitura-fixa">PREFEITURA MUNICIPAL DE GOIANA</span>
+            </div>
+            <div class="header-logo">
+                <img id="logoGoiana" src="https://danilobrand-adv.github.io/contratos/LOGO_PMG_2025.png" alt="Logo do Município de Goiana">
+            </div>
+        </div>
+        <h1>MEMORANDO – DESIGNAÇÃO DE FISCAL DE CONTRATAÇÃO</h1>
+
+        <p>Fica designado, o servidor <span id="out-nomeFiscal" style="font-weight: bold;"></span>, RG nº <span id="out-rgFiscal"></span>, CPF nº <span id="out-cpfFiscal"></span> e Matrícula nº <span id="out-matriculaFiscal"></span>, lotado na <span id="out-lotacaoFiscal"></span>, como Fiscal de Contratação referente à <span id="out-objetoContrato" style="font-weight: bold;"></span>, para atender às necessidades da <span id="out-setorAtendido"></span> para o exercício de <span id="out-exercicio" style="font-weight: bold;"></span>, atendendo às exigências contidas no do art. nº 7 e do artigo nº 117 da Lei nº 14.133 de 2021.</p>
+
+        <p>Na ausência do servidor supra designado, fica designada como suplente a Servidora <span id="out-nomeSuplente" style="font-weight: bold;"></span>, RG nº <span id="out-rgSuplente"></span>, CPF nº <span id="out-cpfSuplente"></span> e Matrícula nº <span id="out-matriculaSuplente"></span>.</p>
+
+        <div class="assinatura" style="margin-top: 50px;">
+            <div class="linha-assinatura"></div>
+            <span id="out-nomeDesignante" style="font-weight: bold;"></span><br>
+            <span id="out-cargoDesignante"></span>
+        </div>
+
+        <h3 style="margin-top: 40px; font-size: 12px; border-bottom: none;">CIÊNCIA DO SERVIDOR DESIGNADO PARA FISCAL</h3> 
+        <p>Eu, <span id="out-ciencia-fiscal" style="font-weight: bold;"></span>, declaro-me ciente da designação de fiscal de contrato ora atribuída, e das suas funções que são inerentes em razão da função.</p>
+        
+        <h3 style="margin-top: 20px; font-size: 12px; border-bottom: none;">CIÊNCIA DO SERVIDOR DESIGNADO PARA SUPLENTE</h3>
+        <p>Eu, <span id="out-ciencia-suplente" style="font-weight: bold;"></span>, declaro-me ciente da designação de suplente de fiscal de contrato ora atribuída, e das suas funções que são inerentes em razão da função.</p>
+
+        <div class="data-local">
+            Goiana, <span id="out-dataExtenso"></span>.
+        </div>
+        
+        <div style="margin-top: 20px;">
+            <div class="assinatura">
+                <div class="linha-assinatura"></div>
+                <span id="out-assinatura-fiscal" style="font-weight: bold;"></span><br>
+                Fiscal do contrato indicado
+            </div>
+            
+            <div class="assinatura" style="margin-top: 40px;">
+                <div class="linha-assinatura"></div>
+                <span id="out-assinatura-suplente" style="font-weight: bold;"></span><br>
+                Suplente do Fiscal do contrato
+            </div>
+        </div>
+
+        <div id="botoes-memorando" style="text-align: center; margin-top: 40px;">
+            <button type="button" onclick="voltarParaEdicao()" id="btn-editar">Voltar e Editar</button>
+            <button type="button" onclick="window.print()" id="btn-imprimir">Imprimir (ou Salvar como PDF)</button>
+        </div>
+        
+    </div> </div>
+
+<script>
+    // Função para formatar a data de 'yyyy-mm-dd' para 'DD de MÊS de YYYY'
+    function formatarData(dataString) {
+        if (!dataString) return '';
+        const [ano, mes, dia] = dataString.split('-');
+        const meses = [
+            'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+            'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+        ];
+        return `${dia} de ${meses[parseInt(mes) - 1]} de ${ano}`;
+    }
+
+    // Função para dividir o texto da unidade em duas linhas, simulando o layout do cabeçalho PGM
+    function dividirUnidade(texto) {
+        // Tenta dividir por "Geral do Município" ou similar, se for longo
+        const partes = texto.split(/ (Geral do Município|Municipal|de Contrato)/i);
+        if (partes.length > 1) {
+             // Junta a primeira parte e o separador
+            const linha1 = partes[0].trim() + (partes[1] ? ' ' + partes[1].trim() : ''); 
+            // Pega o restante do texto
+            const linha2 = partes.slice(2).join(' ').trim();
+            return [linha1, linha2 || '']; // Retorna as duas linhas
+        }
+        // Se for um texto curto, coloca tudo na primeira linha
+        return [texto, '']; 
+    }
+
+    function selecionarObjeto() {
+    const select = document.getElementById('objetoSelect');
+    const textarea = document.getElementById('objetoContrato');
+    
+    // Se uma opção válida for selecionada, atualiza o textarea
+    if (select.value !== "") {
+        textarea.value = select.value;
+    } 
+    // Se "Selecione ou Escreva Abaixo" for escolhido, limpa o campo para novo texto
+    else {
+        textarea.value = "";
+        textarea.focus(); // Coloca o cursor no campo para facilitar a escrita
+    }
+}
+    // Função principal que transfere os dados do formulário para o memorando
+    function gerarMemorando() {
+        // Validação básica
+        if (!document.getElementById('nomeFiscal').value || !document.getElementById('dataMemorando').value) {
+            alert('Preencha pelo menos o Nome do Fiscal e a Data do Memorando.');
+            return;
+        }
+
+        // 1. Coleta de Dados do Formulário
+        const dados = {
+            unidadeEmissora: document.getElementById('unidadeEmissora').value,
+            // ... (restante dos dados do formulário)
+            exercicio: document.getElementById('exercicio').value,
+            dataMemorando: document.getElementById('dataMemorando').value,
+            setorAtendido: document.getElementById('setorAtendido').value,
+            objetoContrato: document.getElementById('objetoContrato').value,
+            nomeFiscal: document.getElementById('nomeFiscal').value,
+            rgFiscal: document.getElementById('rgFiscal').value,
+            cpfFiscal: document.getElementById('cpfFiscal').value,
+            matriculaFiscal: document.getElementById('matriculaFiscal').value,
+            lotacaoFiscal: document.getElementById('lotacaoFiscal').value,
+            nomeSuplente: document.getElementById('nomeSuplente').value,
+            rgSuplente: document.getElementById('rgSuplente').value,
+            cpfSuplente: document.getElementById('cpfSuplente').value,
+            matriculaSuplente: document.getElementById('matriculaSuplente').value,
+            nomeDesignante: document.getElementById('nomeDesignante').value,
+            cargoDesignante: document.getElementById('cargoDesignante').value,
+        };
+
+        // 2. Inserção de Dados no Template (Memorando Output)
+        
+        // Cabeçalho Dinâmico
+        const [unidadeLinha1, unidadeLinha2] = dividirUnidade(dados.unidadeEmissora);
+        document.getElementById('out-unidadeEmissora1').textContent = unidadeLinha1;
+        document.getElementById('out-unidadeEmissora2').textContent = unidadeLinha2;
+
+        // Gerais
+        document.getElementById('out-exercicio').textContent = dados.exercicio;
+        document.getElementById('out-setorAtendido').textContent = dados.setorAtendido;
+        document.getElementById('out-objetoContrato').textContent = dados.objetoContrato;
+        document.getElementById('out-dataExtenso').textContent = formatarData(dados.dataMemorando);
+
+        // Fiscal Titular
+        document.getElementById('out-nomeFiscal').textContent = dados.nomeFiscal;
+        document.getElementById('out-rgFiscal').textContent = dados.rgFiscal;
+        document.getElementById('out-cpfFiscal').textContent = dados.cpfFiscal;
+        document.getElementById('out-matriculaFiscal').textContent = dados.matriculaFiscal;
+        document.getElementById('out-lotacaoFiscal').textContent = dados.lotacaoFiscal;
+        document.getElementById('out-ciencia-fiscal').textContent = dados.nomeFiscal; 
+        document.getElementById('out-assinatura-fiscal').textContent = dados.nomeFiscal; 
+
+        // Fiscal Suplente
+        document.getElementById('out-nomeSuplente').textContent = dados.nomeSuplente;
+        document.getElementById('out-rgSuplente').textContent = dados.rgSuplente;
+        document.getElementById('out-cpfSuplente').textContent = dados.cpfSuplente;
+        document.getElementById('out-matriculaSuplente').textContent = dados.matriculaSuplente;
+        document.getElementById('out-ciencia-suplente').textContent = dados.nomeSuplente; 
+        document.getElementById('out-assinatura-suplente').textContent = dados.nomeSuplente; 
+        
+        // Designante
+        document.getElementById('out-nomeDesignante').textContent = dados.nomeDesignante;
+        document.getElementById('out-cargoDesignante').textContent = dados.cargoDesignante;
+        
+        // 3. Alternar a Visualização para o modo Memorando
+        document.getElementById('formulario').style.display = 'none';
+        document.getElementById('memorando-output').style.display = 'block';
+    }
+
+    // NOVA FUNÇÃO: Voltar e Editar
+    function voltarParaEdicao() {
+        document.getElementById('memorando-output').style.display = 'none';
+        document.getElementById('formulario').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
