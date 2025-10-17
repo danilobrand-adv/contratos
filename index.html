@@ -8,146 +8,66 @@
         /* Estilos básicos para o formulário */
         body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9; }
         .container { max-width: 1000px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-          h2 { color: #333; border-bottom: 2px solid #ddd; padding-bottom: 5px; margin-top: 20px; text-align: center; 
-    /* Garante que o span será posicionado corretamente */
-    line-height: 1.2; 
-}
-
-/* 2. NOVO ESTILO: Para a parte menor do título */
-.subtitulo {
-    display: block; /* FORÇA a quebra de linha */
-    font-size: 0.8em; /* Diminui a fonte (ex: 70% do tamanho do h2) */
-    font-weight: normal; /* Opcional: Tira o negrito herdado do h2 */
-    margin-top: 7px; /* Adiciona um pequeno espaço entre as linhas */
-}
         
-  
-      
-        h3 { color: #333; border-bottom: 2px solid #ddd; padding-bottom: 5px; margin-top: 20px; } }
+        /* Estilo do título do formulário */
+        h2 { color: #333; border-bottom: 2px solid #ddd; padding-bottom: 5px; margin-top: 20px; text-align: center; line-height: 1.2; }
+        .subtitulo { display: block; font-size: 0.8em; font-weight: normal; margin-top: 7px; }
+        h3 { color: #333; border-bottom: 2px solid #ddd; padding-bottom: 5px; margin-top: 20px; }
+        
+        /* Estilo do logo no formulário */
+        .logo-formulario { float: left; margin-right: 10px; }
+        .logo-formulario img { max-height: 80px; width: auto; }
+        .container h2:first-of-type { overflow: hidden; padding-left: 100px; box-sizing: border-box; } /* Limpa o float e ajusta o padding */
+        
         label { display: block; margin-top: 10px; font-weight: bold; }
         
-        /* Estilo base para inputs e selects (incluindo o transition) */
+        /* Estilos para inputs, selects e textareas */
         input[type="text"], input[type="number"], input[type="date"], textarea, select {
-            width: 100%; 
-            padding: 8px; 
-            margin-top: 5px; 
-            border: 1px solid #ccc; 
-            border-radius: 4px; 
-            box-sizing: border-box;
-            /* TRANSITION para suavizar a mudança de cor */
+            width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
             transition: background-color 0.2s ease; 
         }
-
         textarea { resize: vertical; height: 100px; }
+        
+        /* Destaque de campo preenchido */
+        .filled { background-color: #e6f7ff !important; border-color: #a3e6a3 !important; }
+
+        /* Foco: Mudar para branco ao focar */
+        input:focus, textarea:focus, select:focus {
+            background-color: #ffffff; 
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+        }
+
         button { background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; margin-top: 20px; font-size: 16px; margin-right: 10px;}
         button:hover { background-color: #0056b3; }
         .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
         .full-width { grid-column: 1 / -1; }
-        
-        /* NOVO: Estilo para campos preenchidos */
-        .filled {
-            background-color: #e6f7ff !important; /* Verde claro suave */
-            border-color: #a3e6a3 !important;
-        }
-
-        /* Foco: Mudar para branco ao focar, mesmo que preenchido */
-        input:focus, textarea:focus, select:focus {
-            background-color: #ffffff; /* Fundo branco ao focar */
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
-        }
 
         /* Estilos do Memorando de Saída */
         #memorando-output {
-            display: none; /* Esconde o memorando inicialmente */
+            display: none; /* Controlado pelo JS */
             padding: 30px; margin-top: 10px; line-height: 1.5;
         }
-        
-        #memorando-output p {
-            font-size: 10pt; 
-            text-align: justify;
-            margin-bottom: 1em; 
-        }
-        
-        /* NOVO ESTILO: Para a logo no formulário */
-.logo-formulario {
-    float: left; /* Alinha a div à esquerda */
-    margin-right: 10px; /* Dá espaço entre a logo e o texto do título */
-}
-.logo-formulario img {
-    max-height: 80px; /* Define um tamanho adequado para o formulário */
-    width: auto;
-}
-/* Limpa o float para que o conteúdo abaixo não suba */
-.container h2:first-of-type {
-    overflow: hidden; 
-    padding-left: 100px; /* Garante que o texto do h2 não fique por baixo da imagem */
-    box-sizing: border-box;
-}
-        
+        #memorando-output p { font-size: 10pt; text-align: justify; margin-bottom: 1em; }
         
         /* NOVO ESTILO DO CABEÇALHO (Baseado no PGM) */
         .memorando-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 3px solid #ccc; 
-            padding-bottom: 10px;
-            margin-bottom: 30px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 3px solid #ccc; padding-bottom: 10px; margin-bottom: 30px;
         }
         .header-unidade {
-            font-size: 20px;
-            font-weight: bold;
-            color: #000; 
-            line-height: 1.2;
-            padding-right: 20px;
-            border-right: 1px solid #333; 
-            flex-grow: 1; 
+            font-size: 20px; font-weight: bold; color: #000; line-height: 1.2;
+            padding-right: 20px; border-right: 1px solid #333; flex-grow: 1; 
         }
         .header-unidade span { display: block; font-weight: normal; font-size: 24px; } 
-        .header-logo {
-            padding-left: 16px;
-            text-align: right;
-        }     
-        
-        /* NOVO ESTILO: Para a linha fixa da Prefeitura */
-        #out-prefeitura-fixa {
-            display: block; 
-            font-size: 12px; 
-            font-weight: normal; 
-            color: #555; 
-            margin-top: 5px;
-        }   
-        
-        .header-logo img {
-            max-height: 100px; 
-            width: auto;
-            display: block;
-        }
+        #out-prefeitura-fixa { display: block; font-size: 12px; font-weight: normal; color: #555; margin-top: 5px; } 
+        .header-logo { padding-left: 16px; text-align: right; } 
+        .header-logo img { max-height: 100px; width: auto; display: block; }
 
-        /* AJUSTES DE TAMANHO DE FONTE */
-        #memorando-output h1 { 
-            font-size: 12pt; 
-            text-align: center; 
-            margin-bottom: 30px; 
-        }
-
-        #memorando-output .assinatura { 
-            margin-top: 80px; 
-            text-align: center; 
-            font-size: 10pt; 
-        }
-
-        #memorando-output .data-local { 
-            text-align: right; 
-            margin-top: 40px; 
-            font-size: 10pt; 
-        }
-
-        #memorando-output .linha-assinatura { 
-            border-top: 1px solid #000; 
-            width: 60%; 
-            margin: 5px auto 0; 
-        }
+        /* AJUSTES DE TAMANHO DE FONTE DO MEMORANDO */
+        #memorando-output h1 { font-size: 12pt; text-align: center; margin-bottom: 30px; }
+        #memorando-output .assinatura { margin-top: 80px; text-align: center; font-size: 10pt; }
+        #memorando-output .data-local { text-align: right; margin-top: 40px; font-size: 10pt; }
+        #memorando-output .linha-assinatura { border-top: 1px solid #000; width: 60%; margin: 5px auto 0; }
         
         /* Ocultar formulário na impressão e exibir memorando */
         @media print {
@@ -166,58 +86,50 @@
 
 <div class="container">
 
- 
-        <div id="formulario">
-          
-          <div class="logo-formulario">
-        <img src="https://danilobrand-adv.github.io/contratos/LOGO_PMG_2025.png" alt="Logo do Município de Goiana">
-    </div>
-          
-          
-    <h2>
-        COORDENADORIA DO SISTEMA DE CONTROLE INTERNO
-        <span class="subtitulo">Formulário de Designação de Fiscal de Contratatação</span>
-    </h2>
-    </div>
-        
-        
-        
+    <div id="formulario">
+        <div class="logo-formulario">
+            <img src="https://danilobrand-adv.github.io/contratos/LOGO_PMG_2025.png" alt="Logo do Município de Goiana">
+        </div>
+        <h2>
+            COORDENADORIA DO SISTEMA DE CONTROLE INTERNO
+            <span class="subtitulo">Formulário de Designação de Fiscal de Contratatação</span>
+        </h2>
         
         <h3>0. Identificação da Unidade Emissora</h3>
         <div class="full-width">
             <label for="unidadeSelect">Unidade Emissora do Documento (Cabeçalho):</label>
-<select id="unidadeSelect" onchange="selecionarUnidade()">
-    <option value="" selected>--- Selecione a Unidade ---</option>
-    <option value="AD GOIANA">AD GOIANA</option>
-    <option value="ADMINISTRAÇÃO E GESTÃO DE QUALIDADE">ADMINISTRAÇÃO E GESTÃO DE QUALIDADE</option>
-    <option value="AGRICULTURA, PESCA E MEIO AMBIENTE">AGRICULTURA, PESCA E MEIO AMBIENTE</option>
-    <option value="AUTARQUIA MUNICIPAL DO ENSINO SUPERIOR DE GOIANA DR. CLOVIS FONTENELLE">AUTARQUIA MUNICIPAL DO ENSINO SUPERIOR DE GOIANA DR. CLOVIS FONTENELLE</option>
-    <option value="COMUNICAÇÃO">COMUNICAÇÃO</option>
-    <option value="COMISSÃO PERMANENTE DE LICITAÇÃO">COMISSÃO PERMANENTE DE LICITAÇÃO</option>
-    <option value="CONTROLADORIA">CONTROLADORIA</option>
-    <option value="AGÊNCIA MUNICIPAL DE MEIO AMBIENTE DE GOIANA">AGÊNCIA MUNICIPAL DE MEIO AMBIENTE DE GOIANA</option>
-    <option value="DESENVOLVIMENTO ECONÔMICO E TECNOLOGIA">DESENVOLVIMENTO ECONÔMICO E TECNOLOGIA</option>
-    <option value="EDUCAÇÃO E INOVAÇÃO">EDUCAÇÃO E INOVAÇÃO</option>
-    <option value="ARRECADAÇÃO E FINANÇAS">ARRECADAÇÃO E FINANÇAS</option>
-    <option value="ARTICULAÇÃO POLÍTICA E GOVERNO">ARTICULAÇÃO POLÍTICA E GOVERNO</option>
-    <option value="GABINETE DO PREFEITO">GABINETE DO PREFEITO</option>
-    <option value="GOIANAPREVI">GOIANAPREVI</option>
-    <option value="MULHER">MULHER</option>
-    <option value="POLÍTICAS SOCIAIS">POLÍTICAS SOCIAIS</option>
-    <option value="PLANEJAMENTO ESTRATÉGICO">PLANEJAMENTO ESTRATÉGICO</option>
-    <option value="PROCURADORIA GERAL DO MUNICÍPIO">PROCURADORIA GERAL DO MUNICÍPIO</option>
-    <option value="OUVIDORIA">OUVIDORIA</option>
-    <option value="SAÚDE">SAÚDE</option>
-    <option value="GABINETE DO VICE-PREFEITO">GABINETE DO VICE-PREFEITO</option>
-    <option value="ESPORTE E JUVENTUDE">ESPORTE E JUVENTUDE</option>
-    <option value="SEGURANÇA CIDADÃ E TRÂNSITO">SEGURANÇA CIDADÃ E TRÂNSITO</option>
-    <option value="MANUTENÇÃO E SERVIÇOS PÚBLICOS">MANUTENÇÃO E SERVIÇOS PÚBLICOS</option>
-    <option value="TURISMO E DESENVOLVIMENTO CULTURAL">TURISMO E DESENVOLVIMENTO CULTURAL</option>
-    <option value="URBANISMO OBRAS E PATRIMÔNIO">URBANISMO OBRAS E PATRIMÔNIO</option>
-</select>
+            <select id="unidadeSelect" onchange="selecionarUnidade()">
+                <option value="" selected>--- Selecione a Unidade ---</option>
+                <option value="AD GOIANA">AD GOIANA</option>
+                <option value="ADMINISTRAÇÃO E GESTÃO DE QUALIDADE">ADMINISTRAÇÃO E GESTÃO DE QUALIDADE</option>
+                <option value="AGRICULTURA, PESCA E MEIO AMBIENTE">AGRICULTURA, PESCA E MEIO AMBIENTE</option>
+                <option value="AUTARQUIA MUNICIPAL DO ENSINO SUPERIOR DE GOIANA DR. CLOVIS FONTENELLE">AUTARQUIA MUNICIPAL DO ENSINO SUPERIOR DE GOIANA DR. CLOVIS FONTENELLE</option>
+                <option value="COMUNICAÇÃO">COMUNICAÇÃO</option>
+                <option value="COMISSÃO PERMANENTE DE LICITAÇÃO">COMISSÃO PERMANENTE DE LICITAÇÃO</option>
+                <option value="CONTROLADORIA">CONTROLADORIA</option>
+                <option value="AGÊNCIA MUNICIPAL DE MEIO AMBIENTE DE GOIANA">AGÊNCIA MUNICIPAL DE MEIO AMBIENTE DE GOIANA</option>
+                <option value="DESENVOLVIMENTO ECONÔMICO E TECNOLOGIA">DESENVOLVIMENTO ECONÔMICO E TECNOLOGIA</option>
+                <option value="EDUCAÇÃO E INOVAÇÃO">EDUCAÇÃO E INOVAÇÃO</option>
+                <option value="ARRECADAÇÃO E FINANÇAS">ARRECADAÇÃO E FINANÇAS</option>
+                <option value="ARTICULAÇÃO POLÍTICA E GOVERNO">ARTICULAÇÃO POLÍTICA E GOVERNO</option>
+                <option value="GABINETE DO PREFEITO">GABINETE DO PREFEITO</option>
+                <option value="GOIANAPREVI">GOIANAPREVI</option>
+                <option value="MULHER">MULHER</option>
+                <option value="POLÍTICAS SOCIAIS">POLÍTICAS SOCIAIS</option>
+                <option value="PLANEJAMENTO ESTRATÉGICO">PLANEJAMENTO ESTRATÉGICO</option>
+                <option value="PROCURADORIA GERAL DO MUNICÍPIO">PROCURADORIA GERAL DO MUNICÍPIO</option>
+                <option value="OUVIDORIA">OUVIDORIA</option>
+                <option value="SAÚDE">SAÚDE</option>
+                <option value="GABINETE DO VICE-PREFEITO">GABINETE DO VICE-PREFEITO</option>
+                <option value="ESPORTE E JUVENTUDE">ESPORTE E JUVENTUDE</option>
+                <option value="SEGURANÇA CIDADÃ E TRÂNSITO">SEGURANÇA CIDADÃ E TRÂNSITO</option>
+                <option value="MANUTENÇÃO E SERVIÇOS PÚBLICOS">MANUTENÇÃO E SERVIÇOS PÚBLICOS</option>
+                <option value="TURISMO E DESENVOLVIMENTO CULTURAL">TURISMO E DESENVOLVIMENTO CULTURAL</option>
+                <option value="URBANISMO OBRAS E PATRIMÔNIO">URBANISMO OBRAS E PATRIMÔNIO</option>
+            </select>
 
-<input type="text" id="unidadeEmissora" value="" required style="margin-top: 10px;">
-<p class="hint">Ex: Procuradoria Geral do Município, Secretaria de Educação, etc.</p>
+            <input type="text" id="unidadeEmissora" value="" required style="margin-top: 10px;">
+            <p class="hint">Ex: Procuradoria Geral do Município, Secretaria de Educação, etc.</p>
         </div>
 
         <h3>1. Dados do Contrato e Data</h3>
@@ -235,19 +147,19 @@
                 <input type="text" id="setorAtendido" value="" required>
             </div>
            <div class="full-width">
-    <label for="objetoSelect">Selecionar Objeto Predefinido:</label>
-    <select id="objetoSelect" onchange="selecionarObjeto()">
-        <option value="" selected>--- Selecione ou Escreva Abaixo ---</option>
-        <option value="Serviço de Limpeza Urbana e Coleta de Resíduos">Serviço de Limpeza Urbana e Coleta de Resíduos</option>
-        <option value="Aquisição de Material de Consumo para Escritório">Aquisição de Material de Consumo para Escritório</option>
-        <option value="CONTRATAÇÃO DE EMPRESA PARA O FORNECIMENTO DE ÁGUA MINERAL">Contratação de Água Mineral (Completo)</option>
-        </select>
-</div>
+                <label for="objetoSelect">Selecionar Objeto Predefinido:</label>
+                <select id="objetoSelect" onchange="selecionarObjeto()">
+                    <option value="" selected>--- Selecione ou Escreva Abaixo ---</option>
+                    <option value="Serviço de Limpeza Urbana e Coleta de Resíduos">Serviço de Limpeza Urbana e Coleta de Resíduos</option>
+                    <option value="Aquisição de Material de Consumo para Escritório">Aquisição de Material de Consumo para Escritório</option>
+                    <option value="CONTRATAÇÃO DE EMPRESA PARA O FORNECIMENTO DE ÁGUA MINERAL">Contratação de Água Mineral (Completo)</option>
+                </select>
+            </div>
 
-<div class="full-width" style="margin-top: 15px;">
-    <label for="objetoContrato">Detalhes / Edição do Objeto:</label>
-    <textarea id="objetoContrato" required></textarea>
-</div>
+            <div class="full-width" style="margin-top: 15px;">
+                <label for="objetoContrato">Detalhes / Edição do Objeto:</label>
+                <textarea id="objetoContrato" required></textarea>
+            </div>
         </div>
 
         <h3>2. Fiscal de Contrato (Titular)</h3>
@@ -291,7 +203,9 @@
         <div id="botoes-acao">
             <button type="button" onclick="gerarMemorando()">Gerar Memorando / Visualizar</button>
         </div>
-    </div> <div id="memorando-output">
+    </div> 
+    
+    <div id="memorando-output">
         <div class="memorando-header">
             <div class="header-unidade">
                 <span id="out-unidadeEmissora1"></span>
@@ -343,11 +257,11 @@
             <button type="button" onclick="window.print()" id="btn-imprimir">Imprimir (ou Salvar como PDF)</button>
         </div>
         
-    </div> </div>
+    </div> 
+</div>
 
 <script>
     // [FUNÇÕES AUXILIARES]
-    // Função para formatar a data de 'yyyy-mm-dd' para 'DD de MÊS de YYYY'
     function formatarData(dataString) {
         if (!dataString) return '';
         const [ano, mes, dia] = dataString.split('-');
@@ -358,7 +272,6 @@
         return `${dia} de ${meses[parseInt(mes) - 1]} de ${ano}`;
     }
 
-    // Função para dividir o texto da unidade em duas linhas
     function dividirUnidade(texto) {
         const partes = texto.split(/ (Geral do Município|Municipal|de Contrato)/i);
         if (partes.length > 1) {
@@ -370,13 +283,10 @@
     }
 
     // [FUNÇÃO DE MONITORAMENTO DE CAMPOS]
-    // Funçao que adiciona a classe .filled a campos preenchidos
     function aplicarEstiloPreenchido() {
         const campos = document.querySelectorAll('input, textarea, select');
         
         campos.forEach(campo => {
-            // Verifica se o campo tem valor (incluindo campos de data e selects)
-            // Usamos .trim() para garantir que não haja apenas espaços
             if (campo.value && campo.value.trim() !== "") {
                 campo.classList.add('filled');
             } else {
@@ -396,7 +306,7 @@
             textarea.value = "";
             textarea.focus();
         }
-        aplicarEstiloPreenchido(); // Chamada para atualizar o destaque
+        aplicarEstiloPreenchido();
     }
     
     function selecionarUnidade() {
@@ -409,10 +319,10 @@
             input.value = "";
             input.focus();
         }
-        aplicarEstiloPreenchido(); // Chamada para atualizar o destaque
+        aplicarEstiloPreenchido();
     }
 
-    // [FUNÇÃO PRINCIPAL]
+    // [FUNÇÃO PRINCIPAL: GERAR MEMORANDO]
     function gerarMemorando() {
         
         const camposObrigatorios = [
@@ -427,7 +337,6 @@
             { id: 'matriculaFiscal', nome: 'Matrícula/Portaria Fiscal (Titular)' },
             { id: 'lotacaoFiscal', nome: 'Lotação Fiscal (Titular)' },
             { id: 'nomeSuplente', nome: 'Nome Fiscal (Suplente)' },
-            // Incluí o resto dos campos do suplente, já que eles estão com 'required' no HTML
             { id: 'rgSuplente', nome: 'RG Fiscal (Suplente)' },
             { id: 'cpfSuplente', nome: 'CPF Fiscal (Suplente)' },
             { id: 'matriculaSuplente', nome: 'Matrícula/Portaria Fiscal (Suplente)' },
@@ -457,7 +366,7 @@
             return;
         }
 
-        // 2. Coleta de Dados 
+        // 2. Coleta e Inserção de Dados no Template
         const dados = {
             unidadeEmissora: document.getElementById('unidadeEmissora').value,
             exercicio: document.getElementById('exercicio').value,
@@ -477,7 +386,6 @@
             cargoDesignante: document.getElementById('cargoDesignante').value,
         };
 
-        // 3. Inserção de Dados no Template
         const [unidadeLinha1, unidadeLinha2] = dividirUnidade(dados.unidadeEmissora);
         document.getElementById('out-unidadeEmissora1').textContent = unidadeLinha1;
         document.getElementById('out-unidadeEmissora2').textContent = unidadeLinha2;
@@ -505,7 +413,7 @@
         document.getElementById('out-nomeDesignante').textContent = dados.nomeDesignante;
         document.getElementById('out-cargoDesignante').textContent = dados.cargoDesignante;
         
-        // 4. Alternar a Visualização
+        // 3. Alternar a Visualização para o modo Memorando
         document.getElementById('formulario').style.display = 'none';
         document.getElementById('memorando-output').style.display = 'block';
     }
@@ -514,27 +422,21 @@
     function voltarParaEdicao() {
         document.getElementById('memorando-output').style.display = 'none';
         document.getElementById('formulario').style.display = 'block';
-        // Opcional: reaplica o estilo de preenchido ao voltar, caso alguma interação tenha ocorrido
         aplicarEstiloPreenchido(); 
     }
 
-    // INICIALIZAÇÃO: Esta é a parte crucial para o destaque funcionar automaticamente
+    // INICIALIZAÇÃO: Monitoramento de campos para destaque
     document.addEventListener('DOMContentLoaded', () => {
-        // 1. Aplica o estilo no carregamento (para pegar dados preenchidos pelo navegador)
         aplicarEstiloPreenchido(); 
         
         const campos = document.querySelectorAll('input, textarea, select');
         
         campos.forEach(campo => {
-            // 2. Monitora o evento 'input' (digitação) e 'change' (selects, datas)
             campo.addEventListener('input', aplicarEstiloPreenchido);
             campo.addEventListener('change', aplicarEstiloPreenchido);
-            
-            // 3. Monitora o evento 'focus' (ajuda a pegar alguns casos de autocomplete tardio)
             campo.addEventListener('focus', aplicarEstiloPreenchido);
         });
     });
-
 </script>
 
 </body>
