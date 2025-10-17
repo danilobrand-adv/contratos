@@ -10,9 +10,19 @@
         .container { max-width: 1000px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         
         /* Estilo do título do formulário */
-        h2 { color: #333; border-bottom: 2px solid #ddd; padding-bottom: 5px; margin-top: 20px; text-align: center; line-height: 1.2; }
-        .subtitulo { display: block; font-size: 0.8em; font-weight: normal; margin-top: 7px; }
-        h3 { color: #333; border-bottom: 2px solid #ddd; padding-bottom: 5px; margin-top: 20px; }
+        h2 { color: #333; border-bottom: 3px solid #ddd; padding-bottom: 3px; margin-top: 20px; text-align: center; line-height: 1.2; }
+        .subtitulo { display: block; font-size: 0.8em; font-weight: normal; margin-top: 6px; }
+       
+       .container h2:first-of-type { 
+            overflow: hidden; 
+            padding-left: 100px; 
+            box-sizing: border-box; 
+            /* AUMENTAR ESTE VALOR PARA CRIAR MAIS ESPAÇO ABAIXO DO TÍTULO PRINCIPAL */
+            margin-bottom: 40px; /* Altere 40px (ou o valor atual) para, por exemplo, 60px */
+        }
+       
+       
+        h3 { color: #333; border-bottom: 2px solid #ddd; padding-bottom: 2px; margin-top: 10px; }
         
         /* Estilo do logo no formulário */
         .logo-formulario { float: left; margin-right: 10px; }
@@ -140,7 +150,7 @@
             </div>
             <div>
                 <label for="dataMemorando">Data do Memorando:</label>
-                <input type="date" id="dataMemorando" value="2025-01-24" required>
+                <input type="date" id="dataMemorando" value="" required>
             </div>
             <div class="full-width">
                 <label for="setorAtendido">Setor a ser Atendido/Destino (Corpo do Memorando):</label>
