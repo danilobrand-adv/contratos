@@ -39,7 +39,7 @@
         textarea { resize: vertical; height: 100px; }
         
         /* Destaque de campo preenchido */
-        .filled { background-color: #e6f7ff !important; border-color: #a3e6a3 !important; }
+        .filled { background-color: #e6eee6 !important; border-color: #ebc19b !important; }
 
         /* Foco: Mudar para branco ao focar */
         input:focus, textarea:focus, select:focus {
@@ -47,8 +47,8 @@
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
         }
 
-        button { background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; margin-top: 20px; font-size: 16px; margin-right: 10px;}
-        button:hover { background-color: #0056b3; }
+        button { background-color: #4583c6; color: rgb(13, 13, 12); padding: 10px 15px; border: none; border-radius: 6px; cursor: pointer; margin-top: 20px; font-size: 16px; margin-right: 10px;}
+        button:hover { background-color: #4583c6; }
         .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
         .full-width { grid-column: 1 / -1; }
 
@@ -91,6 +91,36 @@
             }
         }
     </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const inputData = document.getElementById('dataMemorando');
+        
+        // 1. Obtém a data atual
+        const hoje = new Date();
+        
+        // 2. Formata a data para o padrão AAAA-MM-DD (exigido pelo input type="date")
+        
+        // Obtém o ano (AAAA)
+        const ano = hoje.getFullYear();
+        
+        // Obtém o mês (MM) e garante dois dígitos (ex: 01, 12)
+        // O método getMonth() retorna de 0 (Janeiro) a 11 (Dezembro), por isso somamos 1
+        const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+        
+        // Obtém o dia (DD) e garante dois dígitos (ex: 05, 31)
+        const dia = String(hoje.getDate()).padStart(2, '0');
+        
+        // Constrói a string no formato AAAA-MM-DD
+        const dataFormatada = `${ano}-${mes}-${dia}`;
+        
+        // 3. Atribui o valor formatado ao campo de input
+        inputData.value = dataFormatada;
+    });
+</script>
+
+
+
 </head>
 <body>
 
@@ -102,7 +132,7 @@
         </div>
         <h2>
             COORDENADORIA DO SISTEMA DE CONTROLE INTERNO
-            <span class="subtitulo">Formulário de Designação de Fiscal de Contratatação</span>
+            <span class="subtitulo">Formulário de Designação de Fiscal de Contratatação - IN 002/2024</span>
         </h2>
         
         <h3>1. Identificação da Unidade Emissora</h3>
@@ -110,31 +140,28 @@
             <label for="unidadeSelect">Unidade Emissora do Documento (Cabeçalho):</label>
             <select id="unidadeSelect" onchange="selecionarUnidade()">
                 <option value="" selected>--- Selecione a Unidade ---</option>
-                <option value="AD GOIANA">AD GOIANA</option>
-                <option value="ADMINISTRAÇÃO E GESTÃO DE QUALIDADE">ADMINISTRAÇÃO E GESTÃO DE QUALIDADE</option>
-                <option value="AGRICULTURA, PESCA E MEIO AMBIENTE">AGRICULTURA, PESCA E MEIO AMBIENTE</option>
-                <option value="AUTARQUIA MUNICIPAL DO ENSINO SUPERIOR DE GOIANA DR. CLOVIS FONTENELLE">AUTARQUIA MUNICIPAL DO ENSINO SUPERIOR DE GOIANA DR. CLOVIS FONTENELLE</option>
-                <option value="COMUNICAÇÃO">COMUNICAÇÃO</option>
-                <option value="COMISSÃO PERMANENTE DE LICITAÇÃO">COMISSÃO PERMANENTE DE LICITAÇÃO</option>
-                <option value="CONTROLADORIA">CONTROLADORIA</option>
-                <option value="AGÊNCIA MUNICIPAL DE MEIO AMBIENTE DE GOIANA">AGÊNCIA MUNICIPAL DE MEIO AMBIENTE DE GOIANA</option>
-                <option value="DESENVOLVIMENTO ECONÔMICO E TECNOLOGIA">DESENVOLVIMENTO ECONÔMICO E TECNOLOGIA</option>
-                <option value="EDUCAÇÃO E INOVAÇÃO">EDUCAÇÃO E INOVAÇÃO</option>
-                <option value="ARRECADAÇÃO E FINANÇAS">ARRECADAÇÃO E FINANÇAS</option>
-                <option value="ARTICULAÇÃO POLÍTICA E GOVERNO">ARTICULAÇÃO POLÍTICA E GOVERNO</option>
+                <option value="AGÊNCIA MUNICIPAL DE DESENVOLVIMENTO ADGOIANA">AD GOIANA</option>
+                <option value="SECRETARIA DE ADMINISTRAÇÃO E GESTÃO DA QUALIDADE">ADMINISTRAÇÃO E GESTÃO DE QUALIDADE</option>
+                <option value="sECRETARIA DE AGRICULTURA, PESCA E MEIO AMBIENTE">AGRICULTURA, PESCA E MEIO AMBIENTE</option>
+                <option value="AUTARQUIA MUNICIPAL DO ENSINO SUPERIOR DE GOIANA - AMESG">AUTARQUIA MUNICIPAL DO ENSINO SUPERIOR DE GOIANA - AMESG</option>
+                <option value="SECRETARIA DE COMUNICAÇÃO">COMUNICAÇÃO</option>
+                <option value="AGÊNCIA MUNICIPAL DE MEIO AMBIENTE DE GOIANA - AMAG">AGÊNCIA MUNICIPAL DE MEIO AMBIENTE DE GOIANA</option>
+                <option value="SECRETARIA DE DESENVOLVIMENTO ECONÔMICO E TECNOLOGIA">DESENVOLVIMENTO ECONÔMICO E TECNOLOGIA</option>
+                <option value="SECRETARIA DE EDUCAÇÃO E INOVAÇÃO">EDUCAÇÃO E INOVAÇÃO</option>
+                <option value="SECRETARIA DE ARRECADAÇÃO E FINANÇAS">ARRECADAÇÃO E FINANÇAS</option>
+                <option value="SECRETARIA DE ARTICULAÇÃO POLÍTICA E GOVERNO">ARTICULAÇÃO POLÍTICA E GOVERNO</option>
                 <option value="GABINETE DO PREFEITO">GABINETE DO PREFEITO</option>
-                <option value="GOIANAPREVI">GOIANAPREVI</option>
-                <option value="MULHER">MULHER</option>
-                <option value="POLÍTICAS SOCIAIS">POLÍTICAS SOCIAIS</option>
-                <option value="PLANEJAMENTO ESTRATÉGICO">PLANEJAMENTO ESTRATÉGICO</option>
-                <option value="PROCURADORIA GERAL DO MUNICÍPIO">PROCURADORIA GERAL DO MUNICÍPIO</option>
-                <option value="OUVIDORIA">OUVIDORIA</option>
-                <option value="SAÚDE">SAÚDE</option>
-                <option value="GABINETE DO VICE-PREFEITO">GABINETE DO VICE-PREFEITO</option>
-                <option value="ESPORTE E JUVENTUDE">ESPORTE E JUVENTUDE</option>
-                <option value="SEGURANÇA CIDADÃ E TRÂNSITO">SEGURANÇA CIDADÃ E TRÂNSITO</option>
-                <option value="MANUTENÇÃO E SERVIÇOS PÚBLICOS">MANUTENÇÃO E SERVIÇOS PÚBLICOS</option>
-                <option value="TURISMO E DESENVOLVIMENTO CULTURAL">TURISMO E DESENVOLVIMENTO CULTURAL</option>
+                <option value="INSTITUTO DE PREVIDÊNCIA DE GOANA - GOIANAPREVI">GOIANAPREVI</option>
+                <option value="SECRETARIA DA MULHER">MULHER</option>
+                <option value="SECRETARIA DE POLÍTICAS SOCIAIS">POLÍTICAS SOCIAIS</option>
+                <option value="SECRETARIA DE PLANEJAMENTO ESTRATÉGICO">PLANEJAMENTO ESTRATÉGICO</option>
+                <option value="PROCURADORIA GERAL DO MUNICÍPIO ">PROCURADORIA GERAL DO MUNICÍPIO</option>
+                <option value="OUVIDORIA MUNICIPAL">OUVIDORIA</option>
+                <option value="SECRETARIA DE SAÚDE">SAÚDE</option>
+                <option value="SECRETARIA DE ESPORTE E JUVENTUDE">ESPORTE E JUVENTUDE</option>
+                <option value="SECRETARIA DE SEGURANÇA CIDADÃ E TRÂNSITO">SEGURANÇA CIDADÃ E TRÂNSITO</option>
+                <option value="SECRETARIA DE MANUTENÇÃO E SERVIÇOS PÚBLICOS">MANUTENÇÃO E SERVIÇOS PÚBLICOS</option>
+                <option value="SECRETARIA DE TURISMO E DESENVOLVIMENTO CULTURAL">TURISMO E DESENVOLVIMENTO CULTURAL</option>
                 <option value="URBANISMO OBRAS E PATRIMÔNIO">URBANISMO OBRAS E PATRIMÔNIO</option>
             </select>
 
@@ -144,14 +171,24 @@
 
         <h3>2. Dados do Contrato e Data</h3>
         <div class="grid">
-            <div>
-                <label for="exercicio">Exercício:</label>
-                <input type="number" id="exercicio" value="2025" required>
+           
+         <div>
+            <label for="exercicio">Exercício:</label>
+            <select id="exercicio" name="exercicio" required>
+            <option value="" disabled selected>Selecione o Ano</option>
+            <option value="2024">2025</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2026">2026</option>
+           
+            <select>
             </div>
+                              
             <div>
                 <label for="dataMemorando">Data do Memorando:</label>
                 <input type="date" id="dataMemorando" value="" required>
             </div>
+
             <div class="full-width">
                 <label for="setorAtendido">Setor a ser Atendido/Destino (Corpo do Memorando):</label>
                 <input type="text" id="setorAtendido" value="" required>
